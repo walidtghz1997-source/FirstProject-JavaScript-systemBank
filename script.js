@@ -126,3 +126,50 @@ function signUp() {
     alert("Account created");
 }
 
+// this is login
+function login() {
+    let foundUser = null;
+
+    while (true) {
+        let email = prompt("Email:");
+        if (!email) continue;
+
+        email = email.trim().toLowerCase();
+
+        foundUser = users.find(u => u.email === email);
+
+        if (foundUser) break;
+
+        alert("Not found");
+    }
+
+    let attempts = 3;
+
+    while (attempts > 0) {
+        let pass = prompt("Password:");
+
+        if (foundUser.password === pass) {
+            currentUser = foundUser;
+
+            currentUser.history.push("Login");
+            saveUsers();
+
+            alert("Welcome " + currentUser.fullname);
+
+            let result = bankMenu();
+
+            if (result === "exit") {
+                isRunning = false;
+                return;
+            }
+
+            return;
+        }
+
+        attempts--;
+        alert("Wrong password. Left: " + attempts);
+    }
+
+    alert("Account blocked");
+}
+
