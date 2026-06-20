@@ -252,3 +252,19 @@ function deposit() {
     saveUsers();
 }
 
+// this is a loan
+function loan() {
+    let max = currentUser.balance * 0.2;
+
+    let amount = Number(prompt("Loan (max " + max + "):"));
+
+    if (isNaN(amount) || amount <= 0) return alert("Invalid");
+    if (amount > max) return alert("Too much");
+
+    currentUser.loan += amount;
+    currentUser.balance += amount;
+
+    currentUser.history.push("Loan " + amount);
+
+    saveUsers();
+}
