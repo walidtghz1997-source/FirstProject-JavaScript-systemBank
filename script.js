@@ -293,3 +293,26 @@ function showHistory() {
     );
 }
 
+// this is change password
+function changePassword() {
+    if (!currentUser) return alert("Login first");
+
+    while (true) {
+        let pass = prompt("New password:");
+
+        if (!pass) continue;
+
+        if (!/^(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{7,}$/.test(pass)) {
+            alert("Weak password");
+            continue;
+        }
+
+        currentUser.password = pass;
+        currentUser.history.push("Password changed");
+
+        saveUsers();
+        alert("Updated");
+        break;
+    }
+}
+
