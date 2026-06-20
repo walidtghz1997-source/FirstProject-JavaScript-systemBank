@@ -268,3 +268,28 @@ function loan() {
 
     saveUsers();
 }
+
+// this is a invest
+function invest() {
+    let amount = Number(prompt("Invest:"));
+
+    if (isNaN(amount) || amount <= 0) return alert("Invalid");
+    if (amount > currentUser.balance) return alert("No balance");
+
+    currentUser.balance -= amount;
+    currentUser.invest += amount;
+
+    currentUser.history.push("Invest " + amount);
+
+    saveUsers();
+}
+
+// this is history
+function showHistory() {
+    alert(
+        currentUser.history.length
+            ? currentUser.history.join("\n")
+            : "No history"
+    );
+}
+
