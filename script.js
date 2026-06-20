@@ -316,3 +316,56 @@ function changePassword() {
     }
 }
 
+// this is investment profit
+function investmentProfit() {
+    let rate = 0.2;
+
+    if (currentUser.invest <= 0) {
+        alert("No investment found");
+        return;
+    }
+
+    let profit = currentUser.invest * rate;
+
+    currentUser.balance += profit;
+
+    currentUser.history.push("Investment profit " + profit);
+
+    saveUsers();
+
+    alert("Profit added: " + profit);
+}
+// repay loan
+function repayLoan() {
+    let amount = Number(prompt("Repay loan amount:"));
+
+    if (isNaN(amount) || amount <= 0) {
+        alert("Invalid amount");
+        return;
+    }
+
+    if (currentUser.loan <= 0) {
+        alert("No loan found");
+        return;
+    }
+
+    if (amount > currentUser.balance) {
+        alert("No balance");
+        return;
+    }
+
+    if (amount > currentUser.loan) {
+        amount = currentUser.loan;
+    }
+
+    currentUser.balance -= amount;
+    currentUser.loan -= amount;
+
+    currentUser.history.push("Loan repayment " + amount);
+
+    saveUsers();
+
+    alert("Loan updated");
+}
+
+console.log(users);
