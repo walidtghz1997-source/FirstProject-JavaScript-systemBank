@@ -225,3 +225,16 @@ function bankMenu() {
         }
     }
 }
+// this is withdraw
+function withdraw() {
+    let amount = Number(prompt("Amount:"));
+
+    if (isNaN(amount) || amount <= 0) return alert("Invalid");
+    if (amount > currentUser.balance) return alert("No balance");
+
+    currentUser.balance -= amount;
+    currentUser.history.push("Withdraw " + amount);
+
+    saveUsers();
+}
+
