@@ -238,3 +238,17 @@ function withdraw() {
     saveUsers();
 }
 
+// this is a deposit
+function deposit() {
+    let amount = Number(prompt("Amount:"));
+
+    if (isNaN(amount) || amount <= 0) return alert("Invalid");
+    if (amount > 1000) return alert("Max 1000");
+
+    currentUser.balance += amount;
+    currentUser.history.push("Deposit " + amount);
+    
+
+    saveUsers();
+}
+
