@@ -173,3 +173,55 @@ function login() {
     alert("Account blocked");
 }
 
+
+// this is bank menu
+function bankMenu() {
+    let choice = "";
+
+    while (choice !== "7" && isRunning) {
+        choice = prompt(
+            "Welcome " + currentUser.fullname +
+            "\nBalance: " + currentUser.balance +
+            "\n\n1 Withdraw" +
+            "\n2 Deposit" +
+            "\n3 Loan" +
+            "\n4 Invest" +
+            "\n5 History" +
+            "\n6 Logout" +
+            "\n7 Exit" +
+            "\n8 Investment Profit" +
+            "\n9 Repay Loan"
+        );
+
+        if (choice === "1") withdraw();
+        else if (choice === "2") deposit();
+        else if (choice === "3") loan();
+        else if (choice === "4") invest();
+        else if (choice === "5") showHistory();
+
+        else if (choice === "6") {
+            currentUser.history.push("Logout");
+            saveUsers();
+            currentUser = null;
+            alert("Logged out");
+            return;
+        }
+
+        else if (choice === "7") {
+            currentUser.history.push("Exit");
+            saveUsers();
+
+            currentUser = null;
+            isRunning = false;
+
+            alert("Goodbye");
+            return "exit";
+        }
+        else if (choice === "8") investmentProfit();
+        else if (choice === "9") repayLoan();
+
+        else {
+            alert("Invalid choice");
+        }
+    }
+}
